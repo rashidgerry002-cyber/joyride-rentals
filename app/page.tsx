@@ -145,7 +145,7 @@ export default function JoyrideLuxuryWebsite() {
       <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="font-script text-3xl text-[#D4AF37]">Kisumu's Trusted Travel Partner</span>
+           <span className="font-script text-3xl text-[#D4AF37]">{"Kisumu's Trusted Travel Partner"}</span>
             <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold mb-6 text-white">
               ABOUT JOYRIDE
             </h2>
