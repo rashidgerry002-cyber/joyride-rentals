@@ -1,435 +1,710 @@
-"use client";
-
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-
-export default function JoyrideLuxuryWebsite() {
-  const [bookingForm, setBookingForm] = useState({
-    fullName: '', phone: '', email: '', pickup: '', destination: '',
-    serviceType: '', vehicleType: '', travelDate: '', message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("Thank you for choosing Joyride. Your luxury journey is being prepared!");
-  };
-
-  return (
-    <div className="bg-[#000000] text-white min-h-screen font-sans selection:bg-[#D4AF37] selection:text-black overflow-x-hidden relative">
-      
-      {/* Safe Global Font & Class Injection */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Alex+Brush&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-        
-        .font-blackletter {
-          font-family: 'UnifrakturMaguntia', serif;
-          letter-spacing: 0.05em;
-        }
-        .font-script {
-          font-family: 'Alex Brush', cursive;
-        }
-        .glass-panel {
-          background: rgba(13, 27, 42, 0.45);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glass-card-hover:hover {
-          background: rgba(212, 175, 55, 0.08);
-          border-color: rgba(212, 175, 55, 0.3);
-          transform: translateY(-4px);
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-      `}} />
-
-      {/* SEO Local Business Schema Markup */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "TaxiService",
-            "name": "Joyride Car Hire Taxi Rentals Tours & Travels Agency",
-            "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Star Complex, Ramogi Road",
-              "addressLocality": "Kisumu",
-              "addressCountry": "KE"
-            },
-            "telephone": "0720 034272",
-            "priceRange": "$$",
-            "openingHoursSpecification": {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-              "opens": "00:00",
-              "closes": "23:59"
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyride Universal Agency | Premium Transport Kenya</title>
+    <meta name="description" content="Luxury car hire, taxi services, and airport transfers in Kisumu, Nairobi, and Mombasa.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0D1B2A',
+                        gold: '#D4AF37',
+                        silver: '#C0C0C0',
+                        dark: '#000000',
+                    },
+                    fontFamily: {
+                        serif: ['"Times New Roman"', 'Times', 'serif'],
+                        script: ['"Alex Brush"', 'cursive'],
+                        heading: ['"Permanent Marker"', 'cursive'],
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                    }
+                }
             }
-          })
-        }}
-      />
+        }
+    </script>
 
-      {/* FLOATING LIGHTING EFFECT */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0D1B2A]/60 rounded-full blur-[120px] pointer-events-none z-0 animate-pulse" />
-      <div className="absolute top-[1200px] right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none z-0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-      {/* STICKY GLASS NAVIGATION BAR */}
-      <nav className="sticky top-0 z-50 glass-panel border-b border-white/5 w-full py-4 px-6 md:px-12 flex justify-between items-center transition-all">
-        <div className="flex flex-col">
-          <span className="font-blackletter text-2xl md:text-3xl text-[#D4AF37] tracking-wider font-bold">JOYRIDE</span>
-          <span className="text-[9px] uppercase tracking-[0.3em] text-[#C0C0C0]">Car Hire &amp; Travels</span>
+    <style>
+        body { 
+            background-color: #000000; 
+            color: #FFFFFF; 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #0D1B2A 0%, #000000 70%);
+        }
+        
+        /* Glassmorphism Utilities */
+        .glass-nav { 
+            background: rgba(0, 0, 0, 0.8); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px); 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); 
+        }
+        
+        .glass-card { 
+            background: rgba(13, 27, 42, 0.4);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 1rem; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .glass-card:hover { 
+            transform: translateY(-5px); 
+            border-color: rgba(212, 175, 55, 0.5); 
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #0D1B2A; border-radius: 4px; border: 1px solid #D4AF37; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        .text-gradient {
+            background: linear-gradient(to right, #C0C0C0, #D4AF37, #FFFFFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, #000000 100%);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-serif antialiased selection:bg-gold selection:text-black relative">
+
+    <div id="cursor-glow" class="fixed w-96 h-96 bg-gold rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none z-0 transform -translate-x-1/2 -translate-y-1/2"></div>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="bg-black/60 border-b border-white/10 py-2 px-6 md:px-12 text-[11px] text-silver tracking-widest hidden sm:flex justify-between items-center text-xs">
+            <div class="flex flex-wrap gap-x-6 gap-y-1">
+                <span><i class="fas fa-map-marker-alt text-gold mr-1.5"></i><strong>Nairobi:</strong> Moi Avenue</span>
+                <span><i class="fas fa-map-marker-alt text-gold mr-1.5"></i><strong>Mombasa:</strong> TOFIQ Building, NAIVAS Mwembe</span>
+                <span><i class="fas fa-map-marker-alt text-gold mr-1.5"></i><strong>Kisumu:</strong> Star Complex</span>
+            </div>
+            <div class="hidden md:block">
+                <span><i class="fas fa-phone-alt text-gold mr-1.5"></i> Hotline: 0720 034272</span>
+            </div>
         </div>
-        <div className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-[#C0C0C0]">
-          <a href="#about" className="hover:text-[#D4AF37] transition-colors">About</a>
-          <a href="#services" className="hover:text-[#D4AF37] transition-colors">Services</a>
-          <a href="#fleet" className="hover:text-[#D4AF37] transition-colors">Fleet</a>
-          <a href="#booking" className="hover:text-[#D4AF37] transition-colors">Book Now</a>
-          <a href="#contact" className="hover:text-[#D4AF37] transition-colors">Contact</a>
+
+        <div class="max-w-7xl mx-auto flex justify-between items-center py-3 px-6 md:px-12">
+            <div class="flex items-center space-x-3">
+                <img src="joyrides.jpeg" alt="Joyride Universal Agency Logo" class="w-12 h-12 object-cover rounded-full border border-gold/40 shadow-md">
+                <div class="flex flex-col">
+                    <h1 class="font-heading text-2xl md:text-3xl text-gold font-bold tracking-wider leading-none">Joyride</h1>
+                    <span class="text-[9px] text-silver tracking-[0.2em] font-sans font-semibold">UNIVERSAL AGENCY</span>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-widest text-silver">
+                <a href="#home" class="hover:text-gold transition">HOME</a>
+                <a href="#about" class="hover:text-gold transition">ABOUT</a>
+                <a href="#services" class="hover:text-gold transition">SERVICES</a>
+                <a href="#fleet" class="hover:text-gold transition">FLEET</a>
+                <a href="#contact" class="hover:text-gold transition">CONTACT</a>
+            </div>
+            <a href="#book" class="hidden md:inline-block border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-black transition duration-300 font-semibold tracking-wider text-sm rounded-sm backdrop-blur-sm">BOOK A RIDE</a>
+            
+            <button class="md:hidden text-gold text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <div>
-          <a href="#booking" className="border border-[#D4AF37] px-5 py-2 text-xs uppercase tracking-widest text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-300 font-semibold rounded-none backdrop-blur-sm">
-            Reserve Fleet
-          </a>
-        </div>
-      </nav>
+    </nav>
 
-      {/* CINEMATIC HERO SECTION */}
-      <header className="relative min-h-[95vh] flex items-center justify-center overflow-hidden pt-12">
-        <div className="absolute inset-0 bg-cover bg-center z-0 opacity-40 mix-blend-luminosity scale-105 transition-transform duration-10000" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80')" }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#0D1B2A]/40 z-1" />
+    <a href="https://wa.me/254720034272" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:scale-110 transition-transform cursor-pointer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-            <span className="font-script text-4xl md:text-5xl text-[#D4AF37] block mb-2">Luxury Journeys Begin Here</span>
-            <h1 className="font-blackletter text-6xl md:text-9xl font-bold uppercase tracking-wide bg-gradient-to-b from-white via-[#C0C0C0] to-[#8A8A8A] bg-clip-text text-transparent drop-shadow-2xl">
-              JOYRIDE CAR HIRE
-            </h1>
-            <p className="text-[#C0C0C0] text-xs md:text-base font-light tracking-[0.2em] uppercase max-w-2xl mx-auto mt-6 border-y border-white/10 py-3 backdrop-blur-sm">
-              Premium Car Hire • Taxi Services • Tours &amp; Travels • Airport Transfers
-            </p>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="mt-10 flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
-            <a href="#booking" className="w-64 sm:w-auto bg-[#D4AF37] text-black px-8 py-4 uppercase text-xs tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-              Book A Ride
-            </a>
-            <a href="tel:0720034272" className="w-64 sm:w-auto glass-panel border border-white/20 text-white px-8 py-4 uppercase text-xs tracking-[0.2em] font-bold hover:bg-white/10 transition-all">
-              Call Now
-            </a>
-          </motion.div>
-
-          {/* Statistics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full mt-20 max-w-4xl">
-            {[
-              { value: "1000+", label: "Successful Trips" },
-              { value: "24/7", label: "Availability" },
-              { value: "4.0★", label: "Customer Rating" },
-              { value: "100%", label: "Customer Support" }
-            ].map((stat, i) => (
-              <div key={i} className="glass-panel p-4 md:p-6 text-center border-t-2 border-t-[#D4AF37]/50">
-                <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{stat.value}</h3>
-                <p className="text-[10px] md:text-xs uppercase tracking-widest text-[#C0C0C0] mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      {/* ABOUT SECTION */}
-      <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10 border-t border-white/5">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="font-script text-3xl text-[#D4AF37]">Kisumu&apos;s Trusted Travel Partner</span>
-            <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold mb-6 text-white">
-              ABOUT JOYRIDE
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto gs-reveal">
+            <p class="font-script text-4xl md:text-5xl text-gold mb-4">Kenya's Elite Travel Network</p>
+            <h2 class="font-heading text-5xl md:text-8xl font-bold mb-6 tracking-wide text-white uppercase" style="text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                JOYRIDE <br><span class="text-gradient">UNIVERSAL</span>
             </h2>
-            <p className="text-[#C0C0C0] leading-relaxed font-light mb-4">
-              Joyride Car Hire is a leading transportation, tours, and travel company based in Kisumu, Kenya. We provide professional taxi services, executive car rentals, airport transfers, corporate travel solutions, and customized tour packages throughout Kenya.
+            <p class="font-serif text-lg md:text-xl text-silver mb-10 tracking-wide font-light max-w-2xl mx-auto">
+                Premium Car Hire • Taxi Services • Tours & Travels • Cross-Country Executive Transfers
             </p>
-            <p className="text-[#C0C0C0] leading-relaxed font-light">
-              Operating 24 hours a day, we are committed to delivering safe, reliable, and comfortable transportation experiences for individuals, families, tourists, and businesses.
-            </p>
-          </div>
-          <div className="relative h-[350px] md:h-[450px] overflow-hidden glass-panel p-2">
-            <div className="w-full h-full bg-cover bg-center grayscale contrast-125 brightness-75 hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80')" }}></div>
-            <div className="absolute bottom-6 right-6 glass-panel p-4 border-l-4 border-l-[#D4AF37]">
-              <p className="text-xs uppercase tracking-widest font-semibold text-white">Headquarters</p>
-              <p className="text-xs text-[#C0C0C0]">Kisumu, Kenya</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#book" class="bg-gold text-black px-8 py-4 font-bold tracking-widest hover:bg-white transition duration-300 rounded-sm">BOOK A RIDE</a>
+                <a href="tel:0720034272" class="border border-silver text-silver px-8 py-4 font-bold tracking-widest hover:border-gold hover:text-gold transition duration-300 rounded-sm glass">CALL NOW</a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES SECTION */}
-      <section id="services" className="py-24 bg-gradient-to-b from-[#000000] to-[#0D1B2A]/40 px-6 md:px-12 relative z-10">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <span className="font-script text-3xl text-[#D4AF37]">First-Class Features</span>
-          <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold text-white">OUR PREMIUM SERVICES</h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {[
-            { id: "01", title: "CAR HIRE", desc: "Luxury and economy vehicle rentals for business, leisure, and personal travel." },
-            { id: "02", title: "TAXI SERVICES", desc: "Fast and reliable transportation available 24/7 throughout Kisumu and surrounding areas." },
-            { id: "03", title: "AIRPORT TRANSFERS", desc: "Professional airport pickups and drop-offs with punctual service." },
-            { id: "04", title: "TOURS & TRAVEL", desc: "Customized tours across Kenya including wildlife safaris, lakeside adventures, and cultural experiences." },
-            { id: "05", title: "CORPORATE TRANSPORT", desc: "Business travel solutions for executives, teams, and events." },
-            { id: "06", title: "CHAUFFEUR SERVICES", desc: "Professional drivers providing comfort, safety, and convenience." }
-          ].map((srv) => (
-            <div key={srv.id} className="glass-panel p-8 glass-card-hover relative overflow-hidden group">
-              <span className="absolute top-4 right-6 font-blackletter text-4xl text-white/5 group-hover:text-[#D4AF37]/10 transition-colors">{srv.id}</span>
-              <h3 className="text-xl font-bold text-[#D4AF37] uppercase tracking-wider mb-3">{srv.title}</h3>
-              <p className="text-sm text-[#C0C0C0] font-light leading-relaxed">{srv.desc}</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 border-t border-white/10 pt-10">
+                <div class="stat-item">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gold mb-1">1000<span class="text-xl">+</span></h3>
+                    <p class="text-xs tracking-widest text-silver uppercase">Successful Trips</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gold mb-1">24/7</h3>
+                    <p class="text-xs tracking-widest text-silver uppercase">Availability</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gold mb-1">4.0<span class="text-xl text-yellow-400">★</span></h3>
+                    <p class="text-xs tracking-widest text-silver uppercase">Customer Rating</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gold mb-1">100<span class="text-xl">%</span></h3>
+                    <p class="text-xs tracking-widest text-silver uppercase">Customer Support</p>
+                </div>
             </div>
-          ))}
         </div>
-      </section>
+    </section>
 
-      {/* FLEET SHOWCASE */}
-      <section id="fleet" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <span className="font-script text-3xl text-[#D4AF37]">Elite Fleet</span>
-          <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold text-white">LUXURY VEHICLE GALLERY</h2>
+    <section id="about" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="gs-reveal-left relative">
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-gold opacity-10 rounded-full blur-2xl"></div>
+                <h2 class="font-heading text-4xl md:text-5xl text-white mb-4 tracking-wider uppercase font-bold">About Joyride</h2>
+                <h3 class="font-script text-3xl text-gold mb-6">Your Journey, Our Passion</h3>
+                <p class="text-silver leading-relaxed mb-6 font-light">
+                    Joyride Universal Agency is a prominent transport, tours, and luxury travel system dynamically operational across Kenya with custom logistics facilities stationed in Kisumu, Nairobi, and Mombasa. We provide premium taxi frameworks, top-tier corporate car rentals, safe airport transfers, and bespoke tour modules.
+                </p>
+                <p class="text-silver leading-relaxed font-light">
+                    Available 24 hours a day, we match state-of-the-art vehicle management with well-trained professional drivers to offer first-class corporate and individual travel experiences.
+                </p>
+            </div>
+            <div class="gs-reveal-right relative">
+                <div class="glass-card p-2 rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop" alt="Luxury Travel" class="w-full rounded-lg filter grayscale hover:grayscale-0 transition duration-700">
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { name: "Toyota Axio", img: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80", cap: "4 Passengers", ac: "Climate Control AC", trans: "Automatic" },
-            { name: "Toyota Fielder", img: "https://images.unsplash.com/photo-1617469167446-80e3a446654e?auto=format&fit=crop&w=600&q=80", cap: "5 Passengers", ac: "Full Auto AC", trans: "Automatic" },
-            { name: "Toyota Premio", img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=600&q=80", cap: "5 Passengers", ac: "Premium Climate Control", trans: "Automatic" },
-            { name: "Toyota Prado", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80", cap: "7 Passengers", ac: "Dual-Zone AC", trans: "4x4 Automatic" },
-            { name: "Toyota Noah", img: "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&w=600&q=80", cap: "8 Passengers", ac: "Rear Cabin AC Control", trans: "Automatic" },
-            { name: "Toyota Alphard", img: "https://images.unsplash.com/photo-1525609004556-c46c7d6cf0a3?auto=format&fit=crop&w=600&q=80", cap: "7 Executive Seats", ac: "Tri-Zone Luxury AC", trans: "Automatic" }
-          ].map((car, index) => (
-            <div key={index} className="glass-panel overflow-hidden flex flex-col border-b-4 border-b-transparent hover:border-b-[#D4AF37] transition-all duration-300">
-              <div className="h-52 overflow-hidden relative">
-                <img src={car.img} alt={car.name} className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:scale-105 transition-all duration-500" />
-                <span className="absolute top-4 left-4 glass-panel text-[10px] uppercase text-[#D4AF37] px-3 py-1 font-bold tracking-widest">Available</span>
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold tracking-wide uppercase text-white mb-4">{car.name}</h3>
-                <ul className="text-xs text-[#C0C0C0] space-y-2 mb-6 flex-grow font-light">
-                  <li className="flex items-center gap-2">✦ {car.cap}</li>
-                  <li className="flex items-center gap-2">✦ {car.ac}</li>
-                  <li className="flex items-center gap-2">✦ {car.trans}</li>
-                  <li className="flex items-center gap-2 text-[#D4AF37]">✦ Pricing: Exclusive Rates on Request</li>
+    <section id="services" class="py-24 relative z-10 bg-navy/20 px-6 border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gs-reveal">
+                <h2 class="font-heading text-4xl md:text-5xl text-white mb-2 tracking-wider uppercase font-bold">Our Services</h2>
+                <p class="font-script text-3xl text-gold">Luxury Journeys Begin Here</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-car text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Car Hire</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Luxury and economy vehicle rentals for business, leisure, and personal travel.</p>
+                </div>
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-taxi text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Taxi Services</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Fast and reliable transportation available 24/7 throughout our municipal networks.</p>
+                </div>
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-plane-arrival text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Airport Transfers</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Professional airport pickups and drop-offs at JKIA, Moi International, and Kisumu International Airports.</p>
+                </div>
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-map-marked-alt text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Tours & Travel</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Customized tours across Kenya including wildlife safaris, lakeside adventures, and cultural experiences.</p>
+                </div>
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-user-tie text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Corporate Transport</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Business travel solutions for executives, diplomatic teams, and corporate events.</p>
+                </div>
+                <div class="glass-card p-8 gs-stagger">
+                    <i class="fas fa-id-card text-4xl text-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3 tracking-wide uppercase">Chauffeur Services</h3>
+                    <p class="text-silver font-light text-sm leading-relaxed">Professional drivers providing top-tier comfort, safety, and local terrain expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fleet" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gs-reveal">
+                <h2 class="font-heading text-4xl md:text-5xl text-white mb-2 tracking-wider uppercase font-bold">Premium Fleet</h2>
+                <p class="font-script text-3xl text-gold">Ride Beyond Expectations</p>
+                <p class="text-sm text-silver mt-4 max-w-2xl mx-auto italic">*Note: Placeholder images are currently in use. Please use the Admin panel below to upload actual photos from your gallery.</p>
+            </div>
+
+            <div id="fleet-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+            <div class="mt-16 text-center gs-reveal">
+                <button onclick="toggleVehicleForm()" class="border-2 border-gold text-gold px-8 py-3 font-bold text-sm tracking-widest hover:bg-gold hover:text-black transition-all duration-300 rounded-sm shadow-md uppercase">
+                    <i class="fas fa-plus-circle mr-2"></i> Add New Vehicle From Gallery
+                </button>
+            </div>
+
+            <div id="add-vehicle-panel" class="max-w-3xl mx-auto mt-8 hidden glass-card p-8 border border-gold/20">
+                <h3 class="font-heading text-2xl text-center text-white mb-6 tracking-wide uppercase">Register Vehicle Specifications</h3>
+                <form id="fleet-admin-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Vehicle Title / Make</label>
+                        <input type="text" id="admin-name" required placeholder="e.g., Toyota Prado J150" class="glass-input px-4 py-2.5 rounded-sm text-sm">
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Model Specific Variant / Edition</label>
+                        <input type="text" id="admin-type" required placeholder="e.g., 2017 Luxury Edition" class="glass-input px-4 py-2.5 rounded-sm text-sm">
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Max Passengers</label>
+                        <input type="number" id="admin-pass" required placeholder="e.g., 7" class="glass-input px-4 py-2.5 rounded-sm text-sm">
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Transmission Type</label>
+                        <select id="admin-auto" class="glass-input px-4 py-2.5 rounded-sm text-sm bg-black/90">
+                            <option value="true">Automatic</option>
+                            <option value="false">Manual</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Climate System</label>
+                        <select id="admin-ac" class="glass-input px-4 py-2.5 rounded-sm text-sm bg-black/90">
+                            <option value="true">Air Conditioned (A/C)</option>
+                            <option value="false">Standard Climate</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex flex-col space-y-1">
+                        <label class="text-xs uppercase tracking-widest text-silver font-semibold">Upload Vehicle Image</label>
+                        <input type="file" id="admin-img" accept="image/*" class="glass-input px-4 py-2 rounded-sm text-sm text-silver file:mr-4 file:py-1 file:px-4 file:rounded-sm file:border-0 file:text-xs file:font-bold file:tracking-wider file:uppercase file:bg-gold file:text-black hover:file:bg-white transition-all cursor-pointer">
+                    </div>
+
+                    <div class="md:col-span-2 pt-4">
+                        <button type="submit" class="w-full bg-gold text-black font-bold tracking-widest py-3.5 hover:bg-white transition-all duration-300 rounded-sm uppercase text-sm">
+                            Commit New Fleet Unit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative z-10 bg-navy/20 px-6 border-y border-white/5">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
+            <div class="gs-reveal-left">
+                <h2 class="font-heading text-4xl text-white mb-8 tracking-wider uppercase font-bold">Why Choose Us</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Available 24/7</span>
+                    </div>
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Professional Drivers</span>
+                    </div>
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Affordable Rates</span>
+                    </div>
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Safe & Secure Travel</span>
+                    </div>
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Luxury Fleet</span>
+                    </div>
+                    <div class="glass-card p-4 flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-gold text-xl"></i>
+                        <span class="text-sm font-semibold tracking-wide text-silver">Fast Booking Process</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gs-reveal-right flex flex-col justify-center">
+                <h2 class="font-heading text-4xl text-white mb-2 tracking-wider uppercase font-bold">Testimonials</h2>
+                <div class="flex items-center space-x-2 mb-8">
+                    <div class="text-gold text-xl">★★★★☆</div>
+                    <span class="text-silver text-sm">4.0 Rating • Trusted Across Kenya</span>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="glass-card p-6 relative">
+                        <i class="fas fa-quote-left absolute top-4 right-6 text-3xl text-white/5"></i>
+                        <p class="text-lg font-light italic text-silver mb-4">"You're better."</p>
+                        <h4 class="text-gold font-bold tracking-wider uppercase text-sm">— Kevin Menya</h4>
+                    </div>
+                    <div class="glass-card p-6 relative">
+                        <i class="fas fa-quote-left absolute top-4 right-6 text-3xl text-white/5"></i>
+                        <p class="text-lg font-light italic text-silver mb-4">"Good job."</p>
+                        <h4 class="text-gold font-bold tracking-wider uppercase text-sm">— Paul Ndege</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="py-24 relative z-10 px-6">
+        <div class="max-w-4xl mx-auto gs-reveal">
+            <div class="glass-card p-8 md:p-12 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-gold opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="text-center mb-10">
+                    <h2 class="font-heading text-4xl md:text-5xl text-white mb-2 tracking-wider uppercase font-bold">Reserve Your Ride</h2>
+                    <p class="font-script text-2xl text-gold">Fast, Secure, and Reliable</p>
+                </div>
+
+                <form id="booking-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Full Name *</label>
+                        <input type="text" id="book-name" required class="w-full glass-input px-4 py-3 rounded-sm" placeholder="John Doe">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Phone Number *</label>
+                        <input type="tel" id="book-phone" required class="w-full glass-input px-4 py-3 rounded-sm" placeholder="+254 7XX XXX XXX">
+                    </div>
+                    <div class="space-y-1 md:col-span-2">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Email Address</label>
+                        <input type="email" id="book-email" class="w-full glass-input px-4 py-3 rounded-sm" placeholder="john@example.com">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Pickup Location *</label>
+                        <input type="text" id="book-pickup" required class="w-full glass-input px-4 py-3 rounded-sm" placeholder="E.g. Jomo Kenyatta Airport">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Destination *</label>
+                        <input type="text" id="book-dest" required class="w-full glass-input px-4 py-3 rounded-sm" placeholder="E.g. Star Complex Kisumu">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Service Type</label>
+                        <select id="book-service" class="w-full glass-input px-4 py-3 rounded-sm text-silver appearance-none bg-black/50">
+                            <option value="Airport Transfer">Airport Transfer</option>
+                            <option value="Taxi Service">Taxi Service</option>
+                            <option value="Car Hire">Car Hire</option>
+                            <option value="Corporate Transport">Corporate Transport</option>
+                            <option value="Tour Package">Tour Package</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Vehicle Preference</label>
+                        <select id="book-vehicle" class="w-full glass-input px-4 py-3 rounded-sm text-silver appearance-none bg-black/50">
+                            <option value="Toyota Land Cruiser 200 (V8ZX)">Toyota Land Cruiser 200 (V8ZX)</option>
+                            <option value="Land Cruiser Prado J150">Land Cruiser Prado J150</option>
+                            <option value="Toyota Alphard Vellfire">Toyota Alphard Vellfire</option>
+                            <option value="Mazda CX-5">Mazda CX-5</option>
+                            <option value="Toyota Harrier">Toyota Harrier</option>
+                            <option value="Any Available Economy Sedan/Wagon">Any Available Economy Sedan/Wagon</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1 md:col-span-2">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Travel Date & Time</label>
+                        <input type="datetime-local" id="book-datetime" class="w-full glass-input px-4 py-3 rounded-sm text-silver bg-black/50">
+                    </div>
+                    <div class="space-y-1 md:col-span-2">
+                        <label class="text-xs tracking-widest text-silver uppercase ml-1">Additional Message</label>
+                        <textarea id="book-notes" class="w-full glass-input px-4 py-3 rounded-sm h-24 resize-none" placeholder="Special requirements..."></textarea>
+                    </div>
+                    
+                    <button type="button" onclick="sendWhatsAppBooking()" class="md:col-span-2 bg-gold text-black font-bold tracking-widest py-4 mt-4 hover:bg-white transition duration-300 rounded-sm uppercase text-lg shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center">
+                        <i class="fab fa-whatsapp text-2xl mr-3"></i> Book My Ride on WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative z-10 px-6 border-t border-white/5 bg-black">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
+            <div class="gs-reveal-left">
+                <h2 class="font-heading text-4xl text-white mb-2 tracking-wider uppercase font-bold">Get In Touch</h2>
+                <p class="text-silver mb-10 font-light">We are here to assist you 24/7 across our dynamic service locations.</p>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 glass-card flex items-center justify-center rounded-full text-gold shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-2">Our Corporate Offices</h4>
+                            <ul class="text-silver text-sm font-light space-y-3 leading-relaxed">
+                                <li><strong class="text-gold uppercase tracking-wider text-xs block">Kisumu Head Office:</strong> Star Complex, Ramogi Road</li>
+                                <li><strong class="text-gold uppercase tracking-wider text-xs block">Nairobi Branch:</strong> Moi Avenue</li>
+                                <li><strong class="text-gold uppercase tracking-wider text-xs block">Mombasa Branch:</strong> TOFIQ Building, NAIVAS Mwembe</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 glass-card flex items-center justify-center rounded-full text-gold shrink-0">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-1">Call Us</h4>
+                            <p class="text-gold text-lg tracking-widest">0720 034272</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 glass-card flex items-center justify-center rounded-full text-gold shrink-0">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-1">Business Hours</h4>
+                            <p class="text-silver text-sm font-light">Open 24 Hours / 7 Days a week</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gs-reveal-right h-96 lg:h-auto glass-card overflow-hidden p-2">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.814980637151!2d34.7679!3d-0.0917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182aa4d4!2sKisumu%2C%20Kenya!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s" 
+                    width="100%" height="100%" style="border:0; border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#050A0F] py-16 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <img src="joyrides.jpeg" alt="Joyride Logo" class="w-10 h-10 object-cover rounded-full border border-gold/40">
+                    <h1 class="font-heading text-xl text-gold font-bold tracking-wider uppercase">JOYRIDE</h1>
+                </div>
+                <p class="text-silver text-sm font-light leading-relaxed mb-6">Premium agency solutions across Kenya. Safe, reliable, and premium tailored fleet experiences.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver hover:text-gold hover:border-gold transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver hover:text-gold hover:border-gold transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver hover:text-gold hover:border-gold transition"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/254720034272" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver hover:text-gold hover:border-gold transition"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-6">Quick Links</h4>
+                <ul class="space-y-3 text-silver text-sm font-light">
+                    <li><a href="#home" class="hover:text-gold transition">Home</a></li>
+                    <li><a href="#about" class="hover:text-gold transition">About Us</a></li>
+                    <li><a href="#fleet" class="hover:text-gold transition">Our Fleet</a></li>
+                    <li><a href="#contact" class="hover:text-gold transition">Contact</a></li>
                 </ul>
-                <a href="#booking" className="block w-full text-center border border-white/20 hover:border-[#D4AF37] py-3 text-xs uppercase tracking-widest transition-all font-semibold hover:bg-[#D4AF37] hover:text-black">
-                  Book Now
-                </a>
-              </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* WHY CHOOSE US */}
-      <section className="py-24 bg-[#0D1B2A]/20 border-y border-white/5 px-6 md:px-12 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="font-script text-3xl text-[#D4AF37]">Uncompromised Standards</span>
-            <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold text-white">WHY CHOOSE US</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              "Available 24/7", "Professional Drivers", "Affordable Rates", "Safe & Secure Travel",
-              "Luxury Fleet", "Fast Booking Process", "Airport Specialists", "Local Tourism Experts"
-            ].map((feature, idx) => (
-              <div key={idx} className="glass-panel p-6 flex flex-col justify-between items-start border-l-2 border-l-[#D4AF37]">
-                <span className="text-[#D4AF37] font-bold text-lg mb-2">✓</span>
-                <p className="text-sm font-semibold tracking-wide uppercase text-white">{feature}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CUSTOMER REVIEWS */}
-      <section className="py-24 px-6 md:px-12 max-w-4xl mx-auto text-center relative z-10">
-        <span className="font-script text-3xl text-[#D4AF37]">Testimonials</span>
-        <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold mb-12 text-white">CLIENT EXCELLENCE</h2>
-
-        <div className="grid md:grid-cols-2 gap-8 text-left">
-          {[
-            { quote: "You're better.", author: "Kevin Menya" },
-            { quote: "Good job.", author: "Paul Ndege" }
-          ].map((rev, idx) => (
-            <div key={idx} className="glass-panel p-8 relative">
-              <span className="text-5xl text-[#D4AF37]/20 absolute top-4 left-4 font-serif">“</span>
-              <p className="text-lg italic text-[#C0C0C0] mb-6 relative z-10 pl-4">{`"${rev.quote}"`}</p>
-              <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold pl-4">— {rev.author}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 text-xs uppercase tracking-widest text-[#C0C0C0]">
-          <span className="text-[#D4AF37] font-bold">4.0★ Rating</span> • Trusted by Customers in Kisumu
-        </div>
-      </section>
-
-      {/* BOOKING SECTION */}
-      <section id="booking" className="py-24 bg-gradient-to-b from-[#000000] to-[#0D1B2A] px-6 md:px-12 relative z-10 border-t border-white/5">
-        <div className="max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-none border border-white/10 relative">
-          <div className="text-center mb-10">
-            <span className="font-script text-3xl text-[#D4AF37]">Reservation Desk</span>
-            <h2 className="font-blackletter text-4xl md:text-5xl uppercase tracking-wider font-bold text-white">BOOK YOUR JOURNEY</h2>
-          </div>
-
-          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Full Name</label>
-              <input type="text" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.fullName} onChange={e => setBookingForm({...bookingForm, fullName: e.target.value})} />
+                <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-6">Services</h4>
+                <ul class="space-y-3 text-silver text-sm font-light">
+                    <li><a href="#services" class="hover:text-gold transition">Car Hire</a></li>
+                    <li><a href="#services" class="hover:text-gold transition">Taxi Services</a></li>
+                    <li><a href="#services" class="hover:text-gold transition">Airport Transfers</a></li>
+                    <li><a href="#services" class="hover:text-gold transition">Tours & Travel</a></li>
+                </ul>
             </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Phone Number</label>
-              <input type="tel" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.phone} onChange={e => setBookingForm({...bookingForm, phone: e.target.value})} />
-            </div>
-            <div className="md:col-span-2">
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Email Address</label>
-              <input type="email" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.email} onChange={e => setBookingForm({...bookingForm, email: e.target.value})} />
-            </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Pickup Location</label>
-              <input type="text" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.pickup} onChange={e => setBookingForm({...bookingForm, pickup: e.target.value})} />
-            </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Destination</label>
-              <input type="text" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.destination} onChange={e => setBookingForm({...bookingForm, destination: e.target.value})} />
-            </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Service Type</label>
-              <select className="w-full bg-black border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.serviceType} onChange={e => setBookingForm({...bookingForm, serviceType: e.target.value})}>
-                <option value="">Select Service</option>
-                <option value="Car Hire">Car Hire</option>
-                <option value="Taxi Services">Taxi Service</option>
-                <option value="Airport Transfer">Airport Transfer</option>
-                <option value="Tours & Travel">Tours &amp; Travel</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Vehicle Preferred</label>
-              <select className="w-full bg-black border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.vehicleType} onChange={e => setBookingForm({...bookingForm, vehicleType: e.target.value})}>
-                <option value="">Select Vehicle</option>
-                <option value="Toyota Axio">Toyota Axio</option>
-                <option value="Toyota Fielder">Toyota Fielder</option>
-                <option value="Toyota Premio">Toyota Premio</option>
-                <option value="Toyota Prado">Toyota Prado</option>
-                <option value="Toyota Noah">Toyota Noah</option>
-                <option value="Toyota Alphard">Toyota Alphard</option>
-              </select>
-            </div>
-            <div className="md:col-span-2">
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Travel Date</label>
-              <input type="date" required className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-[#C0C0C0]" value={bookingForm.travelDate} onChange={e => setBookingForm({...bookingForm, travelDate: e.target.value})} />
-            </div>
-            <div className="md:col-span-2">
-              <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Special Instructions / Message</label>
-              <textarea rows={3} className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.message} onChange={e => setBookingForm({...bookingForm, message: e.target.value})}></textarea>
-            </div>
-            <div className="md:col-span-2 mt-4">
-              <button type="submit" className="w-full bg-[#D4AF37] text-black py-4 uppercase text-xs tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-colors shadow-lg">
-                BOOK MY RIDE
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
 
-      {/* CONTACT SECTION WITH MAP INTEGRATION */}
-      <section id="contact" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12">
-        <div>
-          <span className="font-script text-3xl text-[#D4AF37]">Available 24 Hours</span>
-          <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold mb-8 text-white">GET IN TOUCH</h2>
-          
-          <div className="space-y-6 text-sm font-light text-[#C0C0C0]">
             <div>
-              <p className="uppercase text-xs tracking-widest text-[#D4AF37] font-bold mb-1">Corporate Address</p>
-              <p>Star Complex, Ramogi Road</p>
-              <p>Kisumu, Kenya</p>
+                <h4 class="text-white font-bold tracking-wider uppercase text-sm mb-6">Newsletter</h4>
+                <p class="text-silver text-sm font-light mb-4">Subscribe for offers and travel updates.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Email Address" class="glass-input px-4 py-2 w-full text-sm rounded-l-sm">
+                    <button class="bg-gold text-black px-4 py-2 text-sm font-bold rounded-r-sm"><i class="fas fa-paper-plane"></i></button>
+                </div>
             </div>
-            <div>
-              <p className="uppercase text-xs tracking-widest text-[#D4AF37] font-bold mb-1">Direct Hotline</p>
-              <a href="tel:0720034272" className="text-white hover:text-[#D4AF37] text-lg font-medium transition-colors">0720 034272</a>
-            </div>
-            <div>
-              <p className="uppercase text-xs tracking-widest text-[#D4AF37] font-bold mb-1">Business Hours</p>
-              <p>Open 24 Hours / 7 Days a week</p>
-            </div>
-          </div>
         </div>
 
-        <div className="w-full h-[350px] glass-panel p-2">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8163450917634!2d34.751!3d-0.102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMDYnMDcuMiJTIDM0wrA0NScwMy42IkU!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" 
-            className="w-full h-full grayscale contrast-125 invert opacity-80"
-            allowFullScreen={true}
-            loading="lazy"
-            title="Joyride Car Hire Location Map">
-          </iframe>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 text-center flex flex-col items-center">
+            <p class="font-script text-2xl text-gold mb-4">"Every Journey Deserves First-Class Service."</p>
+            <p class="text-white/30 text-xs tracking-widest uppercase">© 2026 Joyride Universal Agency. All Rights Reserved.</p>
         </div>
-      </section>
+    </footer>
 
-      {/* FOOTER */}
-      <footer className="bg-[#000000] border-t border-white/10 py-16 px-6 md:px-12 relative z-10 text-center md:text-left">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 mb-12">
-          <div className="flex flex-col items-center md:items-start">
-            <span className="font-blackletter text-3xl text-[#D4AF37] tracking-wider font-bold">JOYRIDE</span>
-            <p className="text-[10px] text-[#C0C0C0] tracking-[0.2em] uppercase mt-2">Every Journey Deserves First-Class Service.</p>
-          </div>
-          <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-4">Quick Links</h4>
-            <ul className="text-xs space-y-2 text-[#C0C0C0] font-light">
-              <li><a href="#about" className="hover:text-white transition-colors">About Agency</a></li>
-              <li><a href="#fleet" className="hover:text-white transition-colors">Our Fleet Profiles</a></li>
-              <li><a href="#booking" className="hover:text-white transition-colors">Online Booking Desk</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-4">Services</h4>
-            <ul className="text-xs space-y-2 text-[#C0C0C0] font-light">
-              <li>Premium Car Rentals</li>
-              <li>Airport Transfer Systems</li>
-              <li>Kenya Wildlife Safaris</li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-xs uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-4">Connect With Us</h4>
-            <div className="flex space-x-4 text-xs text-[#C0C0C0]">
-              <span className="hover:text-white cursor-pointer">Facebook</span>
-              <span className="hover:text-white cursor-pointer">Instagram</span>
-              <span className="hover:text-white cursor-pointer">TikTok</span>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto border-t border-white/5 pt-8 text-center text-[10px] text-[#8A8A8A] uppercase tracking-widest">
-          &copy; {new Date().getFullYear()} Joyride Car Hire. All Rights Reserved.
-        </div>
-      </footer>
+    <script>
+        // WhatsApp Booking Logic
+        function sendWhatsAppBooking() {
+            // Get form values
+            const name = document.getElementById('book-name').value;
+            const phone = document.getElementById('book-phone').value;
+            const email = document.getElementById('book-email').value;
+            const pickup = document.getElementById('book-pickup').value;
+            const dest = document.getElementById('book-dest').value;
+            const service = document.getElementById('book-service').value;
+            const vehicle = document.getElementById('book-vehicle').value;
+            const datetime = document.getElementById('book-datetime').value;
+            const notes = document.getElementById('book-notes').value;
 
-      {/* WHATSAPP FLOATING BUTTON */}
-      <a 
-        href="https://wa.me/254720034272?text=Hello%20Joyride%20Car%20Hire,%20I%20would%20like%20to%20book%20a%20premium%20vehicle." 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform flex items-center justify-center cursor-pointer"
-        aria-label="Contact Joyride Car Hire via WhatsApp"
-      >
-        <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.4 0 12.008 0c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 12.004-11.948 12.004-.006 0-.012 0-.018 0-2.009-.001-3.98-.535-5.707-1.549L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.858.002-2.634-1.023-5.11-2.886-6.974-1.864-1.864-4.341-2.887-6.979-2.887-5.439 0-9.862 4.42-9.866 9.86-.001 1.748.499 3.454 1.446 4.98L1.988 22.1l4.659-1.222z"/>
-        </svg>
-      </a>
+            // Basic Validation
+            if (!name || !phone || !pickup || !dest) {
+                alert("Please fill in your Name, Phone Number, Pickup Location, and Destination to book a ride.");
+                return;
+            }
 
-      {/* MOBILE STICKY CTA */}
-      <div className="fixed bottom-0 left-0 w-full md:hidden bg-black/80 backdrop-blur-md border-t border-white/10 z-40 flex justify-between p-3 items-center">
-        <div className="text-left pl-2">
-          <p className="text-[10px] uppercase text-[#D4AF37] font-bold tracking-wider">Joyride Car Hire</p>
-          <p className="text-xs font-light text-white">24/7 Premium Dispatch</p>
-        </div>
-        <a href="#booking" className="bg-[#D4AF37] text-black text-xs font-bold px-4 py-2 uppercase tracking-wider">
-          Book Instantly
-        </a>
-      </div>
+            // Construct WhatsApp Message Structure
+            const message = `*NEW BOOKING REQUEST*%0A
+*Name:* ${name}
+*Phone:* ${phone}
+*Email:* ${email || 'Not Provided'}
+*Pickup:* ${pickup}
+*Destination:* ${dest}
+*Service:* ${service}
+*Vehicle:* ${vehicle}
+*Date & Time:* ${datetime || 'ASAP'}
+*Notes:* ${notes || 'None'}`;
 
-    </div>
-  );
-}
+            // Redirect to WhatsApp API
+            const whatsappNumber = "254720034272";
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Core Fleet Database Structure
+        const fleet = [
+            { name: "Toyota Axio E160", type: "2019 Model", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Fielder", type: "Corolla Station Wagon", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Corolla E160", type: "11th Gen Series", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota RAV4 2WD", type: "2.4L 2012 Model", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1621007947382-cc34cf866f5a?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Harrier", type: "2019 Model", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Vanguard SUV", type: "2013 170HP Edition", pass: 7, auto: true, ac: true, img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Alphard Vellfire", type: "2021 Luxury Model", pass: 7, auto: true, ac: true, img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Mazda CX-5", type: "Compact Crossover 2021", pass: 5, auto: true, ac: true, img: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Land Cruiser Prado", type: "J150 Series 2017 Model", pass: 7, auto: true, ac: true, img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota Land Cruiser 200", type: "Series (V8ZX) 2017 Model", pass: 8, auto: true, ac: true, img: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Toyota HiAce H200", type: "Passenger Van Generation", pass: 14, auto: true, ac: true, img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop" },
+            { name: "Mitsubishi Fuso Rosa", type: "Minibus Commercial Model", pass: 28, auto: false, ac: true, img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop" }
+        ];
+
+        // Dynamic Fleet UI Rendering Engine
+        function renderFleet() {
+            const fleetContainer = document.getElementById('fleet-container');
+            if(!fleetContainer) return;
+            
+            let fleetHTML = '';
+            fleet.forEach((car) => {
+                fleetHTML += `
+                    <div class="glass-card overflow-hidden group gs-stagger">
+                        <div class="h-56 overflow-hidden relative bg-black">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                            <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-1 font-heading tracking-wide uppercase">${car.name}</h3>
+                            <p class="text-gold text-xs tracking-widest mb-4 uppercase font-sans font-semibold">${car.type}</p>
+                            
+                            <div class="grid grid-cols-2 gap-y-2 text-sm text-silver mb-6">
+                                <div class="flex items-center"><i class="fas fa-users w-6 text-gold"></i> ${car.pass} Seats</div>
+                                <div class="flex items-center"><i class="fas fa-snowflake w-6 text-gold"></i> ${car.ac ? 'A/C' : 'No A/C'}</div>
+                                <div class="flex items-center"><i class="fas fa-cogs w-6 text-gold"></i> ${car.auto ? 'Auto' : 'Manual'}</div>
+                                <div class="flex items-center"><i class="fas fa-tag w-6 text-gold"></i> Premium Rate</div>
+                            </div>
+                            
+                            <a href="#book" class="block text-center border border-white/20 py-2 hover:bg-gold hover:border-gold hover:text-black transition duration-300 rounded font-semibold tracking-wider text-sm uppercase">Book Now</a>
+                        </div>
+                    </div>
+                `;
+            });
+            fleetContainer.innerHTML = fleetHTML;
+        }
+
+        // Toggle Visibility for Admin Panel Form
+        function toggleVehicleForm() {
+            const panel = document.getElementById('add-vehicle-panel');
+            panel.classList.toggle('hidden');
+            if(!panel.classList.contains('hidden')) {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Form Submission with FileReader for Local Gallery Uploads
+        document.getElementById('fleet-admin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('admin-name').value;
+            const type = document.getElementById('admin-type').value;
+            const pass = parseInt(document.getElementById('admin-pass').value) || 5;
+            const auto = document.getElementById('admin-auto').value === "true";
+            const ac = document.getElementById('admin-ac').value === "true";
+            const fileInput = document.getElementById('admin-img');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    fleet.push({ name, type, pass, auto, ac, img: event.target.result });
+                    renderFleet();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                fleet.push({ 
+                    name, type, pass, auto, ac, 
+                    img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop" 
+                });
+                renderFleet();
+            }
+            
+            this.reset();
+            toggleVehicleForm();
+        });
+
+        // Initialize App View
+        renderFleet();
+
+        // Custom Mouse Cursor Glow Effect
+        const cursor = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // GSAP Animations Engine
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".hero-bg", { scale: 1.1, duration: 2, ease: "power2.out" });
+        gsap.from(".gs-reveal", { y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2 });
+
+        gsap.utils.toArray('.gs-reveal-left').forEach(elem => {
+            gsap.from(elem, { scrollTrigger: { trigger: elem, start: "top 80%" }, x: -50, opacity: 0, duration: 1, ease: "power3.out" });
+        });
+
+        gsap.utils.toArray('.gs-reveal-right').forEach(elem => {
+            gsap.from(elem, { scrollTrigger: { trigger: elem, start: "top 80%" }, x: 50, opacity: 0, duration: 1, ease: "power3.out" });
+        });
+
+        gsap.utils.toArray('.gs-stagger').forEach((elem, i) => {
+            gsap.from(elem, { scrollTrigger: { trigger: elem.parentElement, start: "top 85%" }, y: 30, opacity: 0, duration: 0.8, delay: (i % 3) * 0.15, ease: "power2.out" });
+        });
+
+        // Sticky Navbar Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.style.background = "rgba(0, 0, 0, 0.95)";
+            else nav.style.background = "rgba(0, 0, 0, 0.8)";
+        });
+    </script>
+</body>
+</html>
