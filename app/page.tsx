@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
 
-// Component layout incorporates:
-// - Glassmorphism UI elements (backdrop-blur, borders, translucent backgrounds)
-// - Custom Google Fonts injection (Blackletter, Handwritten Script, Sans-Serif)
-// - Fully interactive states and mobile responsiveness
-// - Built-in Schema Markup for local business SEO optimization
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function JoyrideLuxuryWebsite() {
   const [bookingForm, setBookingForm] = useState({
@@ -13,7 +9,7 @@ export default function JoyrideLuxuryWebsite() {
     serviceType: '', vehicleType: '', travelDate: '', message: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Thank you for choosing Joyride. Your luxury journey is being prepared!");
   };
@@ -21,8 +17,8 @@ export default function JoyrideLuxuryWebsite() {
   return (
     <div className="bg-[#000000] text-white min-h-screen font-sans selection:bg-[#D4AF37] selection:text-black overflow-x-hidden relative">
       
-      {/* Google Fonts Injection */}
-      <style jsx global>{`
+      {/* Safe Global Font & Class Injection */}
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Alex+Brush&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
         
         .font-blackletter {
@@ -44,7 +40,7 @@ export default function JoyrideLuxuryWebsite() {
           transform: translateY(-4px);
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-      `}</style>
+      `}} />
 
       {/* SEO Local Business Schema Markup */}
       <script
@@ -99,7 +95,6 @@ export default function JoyrideLuxuryWebsite() {
 
       {/* CINEMATIC HERO SECTION */}
       <header className="relative min-h-[95vh] flex items-center justify-center overflow-hidden pt-12">
-        {/* Cinematic Media Background Placeholder */}
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-40 mix-blend-luminosity scale-105 transition-transform duration-10000" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80')" }}></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#0D1B2A]/40 z-1" />
 
@@ -114,7 +109,6 @@ export default function JoyrideLuxuryWebsite() {
             </p>
           </motion.div>
 
-          {/* CTA Buttons */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="mt-10 flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
             <a href="#booking" className="w-64 sm:w-auto bg-[#D4AF37] text-black px-8 py-4 uppercase text-xs tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]">
               Book A Ride
@@ -124,7 +118,7 @@ export default function JoyrideLuxuryWebsite() {
             </a>
           </motion.div>
 
-          {/* Animated Statistics */}
+          {/* Statistics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full mt-20 max-w-4xl">
             {[
               { value: "1000+", label: "Successful Trips" },
@@ -145,7 +139,7 @@ export default function JoyrideLuxuryWebsite() {
       <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-           <span className="font-script text-3xl text-[#D4AF37]">{"Kisumu's Trusted Travel Partner"}</span>
+            <span className="font-script text-3xl text-[#D4AF37]">Kisumu&apos;s Trusted Travel Partner</span>
             <h2 className="font-blackletter text-4xl md:text-6xl uppercase tracking-wider font-bold mb-6 text-white">
               ABOUT JOYRIDE
             </h2>
@@ -263,7 +257,7 @@ export default function JoyrideLuxuryWebsite() {
           ].map((rev, idx) => (
             <div key={idx} className="glass-panel p-8 relative">
               <span className="text-5xl text-[#D4AF37]/20 absolute top-4 left-4 font-serif">“</span>
-              <p className="text-lg italic text-[#C0C0C0] mb-6 relative z-10 pl-4">"{rev.quote}"</p>
+              <p className="text-lg italic text-[#C0C0C0] mb-6 relative z-10 pl-4">{`"${rev.quote}"`}</p>
               <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold pl-4">— {rev.author}</p>
             </div>
           ))}
@@ -330,7 +324,7 @@ export default function JoyrideLuxuryWebsite() {
             </div>
             <div className="md:col-span-2">
               <label className="block text-[10px] uppercase tracking-widest text-[#C0C0C0] mb-2">Special Instructions / Message</label>
-              <textarea rows="3" className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.message} onChange={e => setBookingForm({...bookingForm, message: e.target.value})}></textarea>
+              <textarea rows={3} className="w-full bg-black/40 border border-white/10 p-3 text-sm focus:border-[#D4AF37] outline-none transition-colors text-white" value={bookingForm.message} onChange={e => setBookingForm({...bookingForm, message: e.target.value})}></textarea>
             </div>
             <div className="md:col-span-2 mt-4">
               <button type="submit" className="w-full bg-[#D4AF37] text-black py-4 uppercase text-xs tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-colors shadow-lg">
@@ -364,12 +358,11 @@ export default function JoyrideLuxuryWebsite() {
           </div>
         </div>
 
-        {/* Interactive Luxury-styled Map Frame */}
         <div className="w-full h-[350px] glass-panel p-2">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8163450917634!2d34.751!3d-0.102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMDYnMDcuMiJTIDM0wrA0NScwMy42IkU!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" 
             className="w-full h-full grayscale contrast-125 invert opacity-80"
-            allowFullScreen="" 
+            allowFullScreen={true}
             loading="lazy"
             title="Joyride Car Hire Location Map">
           </iframe>
@@ -409,11 +402,11 @@ export default function JoyrideLuxuryWebsite() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto border-t border-white/5 pt-8 text-center text-[10px] text-[#8A8A8A] uppercase tracking-widest">
-          &copy; {new Date().getFullYear()} Joyride Car Hire. Designed for Elite Standards. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Joyride Car Hire. All Rights Reserved.
         </div>
       </footer>
 
-      {/* WHATSAPP FLOATING CONTACT BUTTON */}
+      {/* WHATSAPP FLOATING BUTTON */}
       <a 
         href="https://wa.me/254720034272?text=Hello%20Joyride%20Car%20Hire,%20I%20would%20like%20to%20book%20a%20premium%20vehicle." 
         target="_blank" 
@@ -426,7 +419,7 @@ export default function JoyrideLuxuryWebsite() {
         </svg>
       </a>
 
-      {/* STICKY BOOKING CTA BANNER FOR MOBILE DESKTOP HYBRID CONVERSIONS */}
+      {/* MOBILE STICKY CTA */}
       <div className="fixed bottom-0 left-0 w-full md:hidden bg-black/80 backdrop-blur-md border-t border-white/10 z-40 flex justify-between p-3 items-center">
         <div className="text-left pl-2">
           <p className="text-[10px] uppercase text-[#D4AF37] font-bold tracking-wider">Joyride Car Hire</p>
